@@ -7,22 +7,68 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <UniformGrid Rows="1" Columns="2">
-        <GroupBox Header="Diciplines" Margin="10"></GroupBox>
+        <GroupBox Header="Diciplines" Margin="10">
+            <StackPanel>
+                <GroupBox Margin="10, 10, 10, 10" Height="322">
+                    <StackPanel>
+                        <ListBox Margin="10" Height="auto">
+                            <!--<ListBoxItem>
+                                <UniformGrid Columns="2" HorizontalAlignment="Stretch" Rows="1">
+                                    <Label>Maths</Label>
+                                    <Rectangle Fill="Red"></Rectangle>
+                                </UniformGrid>
+                            </ListBoxItem>-->
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Rows="1" Columns="1" />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+
+                            <ListBoxItem>
+                                <UniformGrid Columns="2">
+                                    <Label>Maths</Label>
+                                    <Rectangle Fill="Red"></Rectangle>
+                                </UniformGrid>
+                            </ListBoxItem>
+                        </ListBox>
+                    </StackPanel>
+                </GroupBox>
+                <UniformGrid Rows="1" Columns="2">
+                    <Button Margin="10">Change status</Button>
+                    <Button Margin="10">Delete</Button>
+                </UniformGrid>
+            </StackPanel>
+        </GroupBox>
         <UniformGrid Rows="2" Columns="1">
             <GroupBox Header="Filter">
                 <StackPanel Margin="10">
-                    <RadioButton Margin="0, 5, 0, 0"> All </RadioButton>
+                    <RadioButton Margin="0, 5, 0, 0" Checked="RBtnAll"> All </RadioButton>
                     <RadioButton Margin="0, 5, 0, 0">Successfully passed</RadioButton>
                     <RadioButton Margin="0, 5, 0, 0"> Not passed yet</RadioButton>
-                    <Grid Orientation="Horizontal">
-                        <Button Margin="0, 10, 0, 0" HorizontalAlignment="Stretch"> Save </Button>
-                        <Button Margin="20, 10, 0, 0" HorizontalAlignment="Stretch">Show</Button>
-                    </Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Margin="0, 10, 0, 0" Width="140"> Save </Button>
+                        <Button Margin="20, 10, 0, 0" Width="140">Show</Button>
+                    </StackPanel>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="Add dicipline">
                 <StackPanel>
-                    
+                    <UniformGrid Rows="2" Columns="2">
+                        <Label Margin="50, 10" >Dicipline</Label>
+                        <TextBox Margin="0, 10"></TextBox>
+                        <Label Margin="50, 10">Status</Label>
+                        <ComboBox Margin="0, 10">
+                            <TextBlock>False</TextBlock>
+                            <TextBlock>True</TextBlock>
+                        </ComboBox>
+                    </UniformGrid>
+                    <Button Margin="50" HorizontalAlignment="Right" Width="80">Add</Button>
                 </StackPanel>
             </GroupBox>
         </UniformGrid>

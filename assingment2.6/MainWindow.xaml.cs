@@ -24,5 +24,10 @@ namespace assingment2._6
         {
             InitializeComponent();
         }
+
+        private void RBtnAll(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
