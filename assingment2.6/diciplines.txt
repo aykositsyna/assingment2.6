@@ -1,0 +1,4 @@
+﻿programming, True
+English, False
+DH, False
+Maths, True
