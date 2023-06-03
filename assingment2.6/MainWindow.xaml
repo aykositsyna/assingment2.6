@@ -49,7 +49,7 @@
                     <RadioButton Margin="0, 5, 0, 0" Name="RBtnNotPassed" IsChecked="{Binding NotPassed}" Command="{Binding FilterCommand}"> Not passed yet</RadioButton>
                     <StackPanel Orientation="Horizontal">
                         <Button Name="BtnSave" Margin="0, 10, 0, 0" Width="140"> Save </Button>
-                        <Button Name="BtnShow" Margin="20, 10, 0, 0" Width="140">Show</Button>
+                        <Button Name="BtnShow" Margin="20, 10, 0, 0" Width="140" Command="{Binding ShowCommand}">Show</Button>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>

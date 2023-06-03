@@ -20,6 +20,7 @@ namespace assingment2._6
         public RelayCommand DeleteCommand { get; set; }
         public RelayCommand ChangeStatusCommand { get; set; }
         public RelayCommand FilterCommand { get; set; }
+        public RelayCommand ShowCommand { get; set; }
         public bool All { get; set; } = true;
         public bool Passed { get; set; } = true;
         public bool NotPassed { get; set; } = false;
@@ -33,23 +34,28 @@ namespace assingment2._6
             Subjects.Add(new Subject() { Title = "a", IsPassed = true });
             Subjects.Add(new Subject() { Title = "b", IsPassed = true });
             Subjects.Add(new Subject() { Title = "c", IsPassed = false });
-            StartFileRead();
+            
 
             AddCommand = new RelayCommand(AddSubject);
             DeleteCommand = new RelayCommand(DeleteSubject);
             ChangeStatusCommand = new RelayCommand(ChangeStatus);
             FilterCommand = new RelayCommand(Filter);
+            ShowCommand = new RelayCommand(StartFileRead);
+
         }
 
-        public async Task StartFileRead()
+        private void StartFileRead()
         {
+
             var file = File.ReadAllText("subjects.txt");
 
             var bn = file.Split('\n');
+            Trace.WriteLine("here");
             foreach (var s in bn)
             {
                 var _arr = s.Split(',');
                 ObservableSubjects.Add(new Subject() { Title = _arr[0], IsPassed = bool.Parse(_arr[1]) });
+
             }
         }
 
