@@ -1,0 +1,18 @@
+diff a/assingment2.6/assingment2.6.csproj b/assingment2.6/assingment2.6.csproj	(rejected hunks)
+@@ -65,12 +65,15 @@
+       <SubType>Code</SubType>
+     </Compile>
+     <Compile Include="BoolToColorConverter.cs" />
+-    <Compile Include="Dicipline.xaml.cs" />
+     <Compile Include="Logic.cs" />
+     <Compile Include="MainWindow.xaml.cs">
+       <DependentUpon>MainWindow.xaml</DependentUpon>
+       <SubType>Code</SubType>
+     </Compile>
++    <Page Include="Themes\Generic.xaml">
++      <Generator>MSBuild:Compile</Generator>
++      <SubType>Designer</SubType>
++    </Page>
+   </ItemGroup>
+   <ItemGroup>
+     <Compile Include="Properties\AssemblyInfo.cs">

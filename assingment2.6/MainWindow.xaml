@@ -6,18 +6,18 @@
         xmlns:local="clr-namespace:assingment2._6"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <local:BoolToColorConverter x:Key="BoolToColorConverter"/>
+        </ResourceDictionary>
+    </Window.Resources>
     <UniformGrid Rows="1" Columns="2">
         <GroupBox Header="Diciplines" Margin="10">
             <StackPanel>
                 <GroupBox Margin="10, 10, 10, 10" Height="322">
                     <StackPanel>
-                        <ListBox Margin="10" Height="auto">
-                            <!--<ListBoxItem>
-                                <UniformGrid Columns="2" HorizontalAlignment="Stretch" Rows="1">
-                                    <Label>Maths</Label>
-                                    <Rectangle Fill="Red"></Rectangle>
-                                </UniformGrid>
-                            </ListBoxItem>-->
+                        <ListBox Margin="10" Height="auto"
+                                 ItemsSource="{Binding Subjects}">
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="ListBoxItem">
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -30,30 +30,32 @@
                                 </ItemsPanelTemplate>
                             </ListBox.ItemsPanel>
 
-                            <!--<ListBoxItem>
-                                <UniformGrid Columns="2">
-                                    <Label>Maths</Label>
-                                    <Rectangle Fill="Red"></Rectangle>
-                                </UniformGrid>
-                            </ListBoxItem>-->
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <UniformGrid Columns="2">
+                                        <Label Content="{Binding Title}"></Label>
+                                        <Rectangle Fill="{Binding IsPassed, Converter={StaticResource BoolToColorConverter}}"></Rectangle>
+                                    </UniformGrid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
                         </ListBox>
                     </StackPanel>
                 </GroupBox>
                 <UniformGrid Rows="1" Columns="2">
-                    <Button Name="BtnChangeStatus" Click="BtnchangeStat_Click" Margin="10">Change status</Button>
-                    <Button Name="BtnDelete" Click="BtnDel_Click" Margin="10">Delete</Button>
+                    <Button Name="BtnChangeStatus" Margin="10">Change status</Button>
+                    <Button Name="BtnDelete" Margin="10" Command="{Binding DeleteCommand}">Delete</Button>
                 </UniformGrid>
             </StackPanel>
         </GroupBox>
         <UniformGrid Rows="2" Columns="1">
             <GroupBox Header="Filter">
                 <StackPanel Margin="10">
-                    <RadioButton Margin="0, 5, 0, 0" Name="RBtnAll" Checked="RBtn_Checked"> All </RadioButton>
-                    <RadioButton Margin="0, 5, 0, 0" Name="RBtnPassed" Checked="RBtn_Checked">Successfully passed</RadioButton>
-                    <RadioButton Margin="0, 5, 0, 0" Name="RBtnNotPassed" Checked="RBtn_Checked"> Not passed yet</RadioButton>
+                    <RadioButton Margin="0, 5, 0, 0" Name="RBtnAll"> All </RadioButton>
+                    <RadioButton Margin="0, 5, 0, 0" Name="RBtnPassed">Successfully passed</RadioButton>
+                    <RadioButton Margin="0, 5, 0, 0" Name="RBtnNotPassed"> Not passed yet</RadioButton>
                     <StackPanel Orientation="Horizontal">
-                        <Button Name="BtnSave" Margin="0, 10, 0, 0" Width="140" Click="BtnSave_Click"> Save </Button>
-                        <Button Name="BtnShow" Margin="20, 10, 0, 0" Width="140" Click="BtnAdd_Click">Show</Button>
+                        <Button Name="BtnSave" Margin="0, 10, 0, 0" Width="140"> Save </Button>
+                        <Button Name="BtnShow" Margin="20, 10, 0, 0" Width="140">Show</Button>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
@@ -61,14 +63,18 @@
                 <StackPanel>
                     <UniformGrid Rows="2" Columns="2">
                         <Label Margin="50, 10" >Dicipline</Label>
-                        <TextBox Name="TBDicipName" Margin="0, 10"></TextBox>
+                        <TextBox Name="TBDicipName" Margin="0, 10" Text="{Binding NewSubject.Title}"></TextBox>
                         <Label Margin="50, 10">Status</Label>
-                        <ComboBox Name="CBDicipStatus" Margin="0, 10">
-                            <TextBlock>False</TextBlock>
-                            <TextBlock>True</TextBlock>
-                        </ComboBox>
+                        <!--<ComboBox Name="CBDicipStatus" Margin="0, 10" SelectedItem="{Binding IsSelected}">
+                            <ComboBox.Items>
+                                <ComboBoxItem Content="true"></ComboBoxItem>
+                                <ComboBoxItem Content="false"></ComboBoxItem>
+                            </ComboBox.Items>
+                            
+                        </ComboBox>-->
+                        <CheckBox Name="Status" Content="passed" Margin="0, 10" IsChecked="{Binding NewSubject.IsPassed}"></CheckBox>
                     </UniformGrid>
-                    <Button Name="BtnAdd" Margin="50" HorizontalAlignment="Right" Width="80" Click="BtnAdd_Click">Add</Button>
+                    <Button Name="BtnAdd" Margin="50" HorizontalAlignment="Right" Width="80" Command="{Binding AddCommand}">Add</Button>
                 </StackPanel>
             </GroupBox>
         </UniformGrid>
