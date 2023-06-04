@@ -7,11 +7,19 @@ using System.Threading.Tasks;
 using System.IO;
 using GalaSoft.MvvmLight.Command;
 using System.Diagnostics;
+using System.ComponentModel;
 
 namespace assingment2._6
 {
-    internal class Logic
+    internal class Logic : INotifyPropertyChanged
     {
+        public void PropertyChange(string PropertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public List<Subject> Subjects = new List<Subject>();
         public ObservableCollection<Subject> ObservableSubjects { get; set; }
         public Subject SelectedSubject { get; set; }
@@ -21,6 +29,7 @@ namespace assingment2._6
         public RelayCommand ChangeStatusCommand { get; set; }
         public RelayCommand FilterCommand { get; set; }
         public RelayCommand ShowCommand { get; set; }
+        public RelayCommand SaveCommand { get; set; }
         public bool All { get; set; } = true;
         public bool Passed { get; set; } = true;
         public bool NotPassed { get; set; } = false;
@@ -46,7 +55,27 @@ namespace assingment2._6
             ChangeStatusCommand = new RelayCommand(ChangeStatus);
             FilterCommand = new RelayCommand(Filter);
             ShowCommand = new RelayCommand(Show);
+            SaveCommand = new RelayCommand(Save);
 
+        }
+
+        private async void Save()
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "subjects.txt");
+            string str = "";
+            foreach(Subject logicSubject in  Subjects)
+            {
+                if (str != "")
+                {
+                    str += "\n";
+                }
+
+                str += $"{logicSubject.Title},{logicSubject.IsPassed}";
+            }
+            using(StreamWriter sr = new StreamWriter(path))
+            {
+                await sr.WriteAsync(str);
+            }
         }
 
         private void Show()
@@ -63,6 +92,7 @@ namespace assingment2._6
                 Subjects.Add(new Subject( _arr[0], bool.Parse(_arr[1]) ));
 
             }
+            Filter();
         }
 
 
@@ -77,8 +107,8 @@ namespace assingment2._6
 
         private void DeleteSubject()
         {
-            ObservableSubjects.Remove(SelectedSubject);
             Subjects.Remove(SelectedSubject);
+            ObservableSubjects.Remove(SelectedSubject);
         }
 
         private void ChangeStatus()
