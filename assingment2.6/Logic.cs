@@ -28,12 +28,17 @@ namespace assingment2._6
         public Logic() 
         { 
             ObservableSubjects = new ObservableCollection<Subject>();
-            ObservableSubjects.Add(new Subject() { Title = "a", IsPassed = true });
-            ObservableSubjects.Add(new Subject() { Title = "b", IsPassed = true });
-            ObservableSubjects.Add(new Subject() { Title = "c", IsPassed = false });
-            Subjects.Add(new Subject() { Title = "a", IsPassed = true });
-            Subjects.Add(new Subject() { Title = "b", IsPassed = true });
-            Subjects.Add(new Subject() { Title = "c", IsPassed = false });
+            //ObservableSubjects.Add(new Subject() { Title = "programming", IsPassed = true });
+            //ObservableSubjects.Add(new Subject() { Title = "maths", IsPassed = true });
+            //ObservableSubjects.Add(new Subject() { Title = "dh", IsPassed = false });
+            Subjects.Add(new Subject() { Title = "programming", IsPassed = true });
+            Subjects.Add(new Subject() { Title = "maths", IsPassed = true });
+            Subjects.Add(new Subject() { Title = "dh", IsPassed = false });
+
+            foreach (Subject sub in  Subjects)
+            {
+                ObservableSubjects.Add(sub);
+            }
             
 
             AddCommand = new RelayCommand(AddSubject);
@@ -50,7 +55,7 @@ namespace assingment2._6
             var file = File.ReadAllText("subjects.txt");
 
             var bn = file.Split('\n');
-            Trace.WriteLine("here");
+            //Trace.WriteLine("here");
             foreach (var s in bn)
             {
                 var _arr = s.Split(',');
@@ -65,7 +70,7 @@ namespace assingment2._6
         {
             ObservableSubjects.Add(new Subject() { Title = NewSubject.Title, IsPassed = NewSubject.IsPassed });
             Subjects.Add(new Subject() { Title = NewSubject.Title, IsPassed = NewSubject.IsPassed });
-            Trace.WriteLine("click");
+            //Trace.WriteLine("click");
             
         }
 
@@ -78,7 +83,7 @@ namespace assingment2._6
         private void ChangeStatus()
         {
             SelectedSubject.IsPassed = !SelectedSubject.IsPassed;
-            Trace.WriteLine(SelectedSubject.IsPassed);
+            //Trace.WriteLine(SelectedSubject.IsPassed);
         }
 
         private void Filter()
