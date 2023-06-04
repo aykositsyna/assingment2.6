@@ -45,21 +45,22 @@ namespace assingment2._6
             DeleteCommand = new RelayCommand(DeleteSubject);
             ChangeStatusCommand = new RelayCommand(ChangeStatus);
             FilterCommand = new RelayCommand(Filter);
-            ShowCommand = new RelayCommand(StartFileRead);
+            ShowCommand = new RelayCommand(Show);
 
         }
 
-        private void StartFileRead()
+        private void Show()
         {
-
-            var file = File.ReadAllText("subjects.txt");
-
+            Subjects.Clear();
+            ObservableSubjects.Clear();
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "subjects.txt");
+            var file = File.ReadAllText(path);
             var bn = file.Split('\n');
             //Trace.WriteLine("here");
             foreach (var s in bn)
             {
                 var _arr = s.Split(',');
-                ObservableSubjects.Add(new Subject( _arr[0], bool.Parse(_arr[1]) ));
+                Subjects.Add(new Subject( _arr[0], bool.Parse(_arr[1]) ));
 
             }
         }
