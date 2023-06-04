@@ -15,7 +15,7 @@ namespace assingment2._6
         public List<Subject> Subjects = new List<Subject>();
         public ObservableCollection<Subject> ObservableSubjects { get; set; }
         public Subject SelectedSubject { get; set; }
-        public Subject NewSubject { get; set; } = new Subject() { Title = string.Empty, IsPassed = true };
+        public Subject NewSubject { get; set; } = new Subject(string.Empty, true );
         public RelayCommand AddCommand { get; set; }
         public RelayCommand DeleteCommand { get; set; }
         public RelayCommand ChangeStatusCommand { get; set; }
@@ -31,9 +31,9 @@ namespace assingment2._6
             //ObservableSubjects.Add(new Subject() { Title = "programming", IsPassed = true });
             //ObservableSubjects.Add(new Subject() { Title = "maths", IsPassed = true });
             //ObservableSubjects.Add(new Subject() { Title = "dh", IsPassed = false });
-            Subjects.Add(new Subject() { Title = "programming", IsPassed = true });
-            Subjects.Add(new Subject() { Title = "maths", IsPassed = true });
-            Subjects.Add(new Subject() { Title = "dh", IsPassed = false });
+            Subjects.Add(new Subject("programming", true ));
+            Subjects.Add(new Subject("maths",  true ));
+            Subjects.Add(new Subject("dh", false ));
 
             foreach (Subject sub in  Subjects)
             {
@@ -59,7 +59,7 @@ namespace assingment2._6
             foreach (var s in bn)
             {
                 var _arr = s.Split(',');
-                ObservableSubjects.Add(new Subject() { Title = _arr[0], IsPassed = bool.Parse(_arr[1]) });
+                ObservableSubjects.Add(new Subject( _arr[0], bool.Parse(_arr[1]) ));
 
             }
         }
@@ -68,8 +68,8 @@ namespace assingment2._6
 
         private void AddSubject()
         {
-            ObservableSubjects.Add(new Subject() { Title = NewSubject.Title, IsPassed = NewSubject.IsPassed });
-            Subjects.Add(new Subject() { Title = NewSubject.Title, IsPassed = NewSubject.IsPassed });
+            ObservableSubjects.Add(new Subject(NewSubject.Title, NewSubject.IsPassed ));
+            Subjects.Add(new Subject(NewSubject.Title, NewSubject.IsPassed ));
             //Trace.WriteLine("click");
             
         }
